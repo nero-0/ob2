@@ -10,7 +10,9 @@
     <PackageReference Include="AngleSharp" Version="1.4.1-beta.506" />
 	<PackageReference Include="BCrypt.Net-Core" Version="1.6.0" />
     <PackageReference Include="CaptchaSharp" Version="2.1.0" />
-    <PackageReference Include="DeviceId" Version="5.2.0" />
+    <PackageReference Include="DeviceId" Version="6.9.0" />
+    <PackageReference Include="DeviceId.Windows.WmiLight" Version="6.9.0" />
+    <PackageReference Include="DeviceId.Linux" Version="6.9.0" />
     <PackageReference Include="FluentFTP" Version="53.0.2" />
     <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
     <PackageReference Include="IronPython" Version="3.4.2" />

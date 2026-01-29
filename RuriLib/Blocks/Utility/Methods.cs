@@ -2,7 +2,6 @@
 using RuriLib.Attributes;
 using RuriLib.Logging;
 using RuriLib.Models.Bots;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace RuriLib.Blocks.Utility
@@ -30,20 +29,21 @@ namespace RuriLib.Blocks.Utility
         public static string GetHWID(BotData data)
         {
             var builder = new DeviceIdBuilder()
+                .UseFormatter(DeviceIdFormatters.DefaultV5)
                 .AddUserName()
                 .AddMachineName()
-                .AddOSVersion()
+                .AddOsVersion()
                 .AddMacAddress()
-                .AddSystemDriveSerialNumber()
-                .AddOSInstallationID();
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                builder
+                .OnWindows(windows => windows
                     .AddProcessorId()
                     .AddMotherboardSerialNumber()
-                    .AddSystemUUID();
-            }
+                    .AddSystemDriveSerialNumber()
+                    .AddSystemUuid()
+                    .AddMachineGuid())
+                .OnLinux(linux => linux
+                    .AddMotherboardSerialNumber()
+                    .AddSystemDriveSerialNumber()
+                    .AddMachineId());
 
             var hwid = builder.ToString();
 
